@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sa2/View/CadastroView.dart'; // Importe a página de registro
-import 'package:sa2/DatabaseController.dart'; // Importe o helper do banco de dados
+import 'package:sa2/model/LoginModel.dart'; // Importe o modelo de login
 
 class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  final LoginModel _loginModel = LoginModel();
+
   // Função para lidar com o login do usuário
   void _login(BuildContext context, String email, String password) async {
-    // Lógica de autenticação...
-    DatabaseHelper dbHelper = DatabaseHelper(); // Instância do helper do banco de dados
-    // Verificar se as credenciais são válidas
-    bool isAuthenticated = await dbHelper.authenticateUser(email, password);
+    bool isAuthenticated = await _loginModel.authenticateUser(email, password);
 
     if (isAuthenticated) {
       // Se as credenciais forem válidas, navegue para a tela de configurações

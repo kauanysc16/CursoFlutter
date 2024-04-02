@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../DatabaseController.dart';
+import '../Controller/DatabaseController.dart';
 import '../model/CadastroModel.dart';
 
 class RegisterPage extends StatelessWidget {
