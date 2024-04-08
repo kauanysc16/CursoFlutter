@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
-import '../Controller/DatabaseController.dart';
-import '../model/CadastroModel.dart';
 
 class RegisterPage extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  void _register(BuildContext context, String name, String email, String password) {
+    // Aqui você adicionaria a lógica para criar uma nova conta
+    // Por exemplo, chamar uma função para enviar os dados do novo usuário para um servidor
+    // Substitua este exemplo com a lógica real do seu aplicativo
+    print('Nome: $name, Email: $email, Senha: $password');
+
+    // Após o cadastro bem-sucedido, você pode navegar para a próxima tela
+    // Por exemplo, você pode navegar para a tela de login ou para a tela inicial do aplicativo
+    Navigator.pushReplacementNamed(context, '/login'); // Substitui a tela atual pela tela de login
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,23 +29,18 @@ class RegisterPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
-                key: Key('name'),
                 controller: nameController,
                 decoration: InputDecoration(
                   labelText: 'Nome',
                 ),
               ),
-              SizedBox(height: 10),
               TextFormField(
-                key: Key('email'),
                 controller: emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
                 ),
               ),
-              SizedBox(height: 10),
               TextFormField(
-                key: Key('password'),
                 controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
@@ -60,36 +64,5 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _register(BuildContext context, String name, String email, String password) async {
-    DatabaseHelper dbHelper = DatabaseHelper();
-    UserModel newUser = UserModel(
-      name: name,
-      email: email,
-      password: password,
-    );
-    int userId = await dbHelper.createUser(newUser as User);
-
-    if (userId != -1) {
-      print('Novo usuário cadastrado com sucesso! ID: $userId');
-      Navigator.pushReplacementNamed(context, '/login');
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Erro no cadastro'),
-          content: Text('Ocorreu um erro ao cadastrar o usuário. Por favor, tente novamente.'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('OK'),
-            ),
-          ],
-        ),
-      );
-    }
   }
 }
