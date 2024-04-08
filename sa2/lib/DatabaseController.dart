@@ -46,6 +46,8 @@ class DatabaseHelper {
 
   authenticateUser(String email, String password) {}
 
+  saveUser(String name, String email, String password) {}
+
   // Implemente outros métodos para manipular o banco de dados, como buscar usuários, atualizar, deletar, etc.
 }
 
