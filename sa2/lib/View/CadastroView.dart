@@ -1,19 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:sa2/View/Login.dart';
+import 'package:sa2/Controller/DatabaseController.dart'; // Importação do controlador do banco de dados
+import 'package:sa2/model/UserModel.dart'; // Importação do modelo de usuário
 
 class RegisterPage extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void _register(BuildContext context, String name, String email, String password) {
-    // Aqui você adicionaria a lógica para criar uma nova conta
-    // Por exemplo, chamar uma função para enviar os dados do novo usuário para um servidor
-    // Substitua este exemplo com a lógica real do seu aplicativo
-    print('Nome: $name, Email: $email, Senha: $password');
+  // Método para registrar um novo usuário
+  void _register(BuildContext context, String name, String email, String password) async {
+    // Criar uma instância do usuário com os dados fornecidos
+    User newUser = User(name: name, email: email, password: password);
+    
+    // Salvar o novo usuário no banco de dados e obter o resultado da operação
+    int result = await DatabaseHelper().createUser(newUser);
 
-    // Após o cadastro bem-sucedido, você pode navegar para a próxima tela
-    // Por exemplo, você pode navegar para a tela de login ou para a tela inicial do aplicativo
-    Navigator.pushReplacementNamed(context, '/login'); // Substitui a tela atual pela tela de login
+    // Verificar se o usuário foi criado com sucesso
+    if (result != 0) {
+      // Se o usuário foi criado com sucesso, navegar para a tela de login
+      Navigator.pushReplacementNamed(context, LoginPage() as String);
+    } else {
+      // Se houve um erro ao criar o usuário, exibir uma mensagem de erro
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Erro'),
+          content: Text('Ocorreu um erro ao criar a conta. Por favor, tente novamente.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Fecha o diálogo
+              },
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override

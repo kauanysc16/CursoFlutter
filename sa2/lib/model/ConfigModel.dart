@@ -1,10 +1,11 @@
-class SettingsModel {
-  // Tamanho de fonte padrão
-  double fontSize = 16.0;
+import 'package:flutter/material.dart';
 
-  // Idioma padrão
-  String selectedLanguage = 'Português';
+class UserSettingsModel {
+  double fontSize;
+  Color backgroundColor;
 
-  // Lista de idiomas disponíveis
-  static const List<String> languages = ['Português', 'Inglês', 'Espanhol'];
+  UserSettingsModel({
+    required this.fontSize,
+    required this.backgroundColor,
+  });
 }

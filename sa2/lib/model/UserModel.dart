@@ -1,10 +1,9 @@
-// ignore_for_file: file_names
-class UserModel {
+class User {
   final String name;
   final String email;
   final String password;
 
-  UserModel({required this.name, required this.email, required this.password});
+  User({required this.name, required this.email, required this.password});
 
   Map<String, dynamic> toMap() {
     return {
