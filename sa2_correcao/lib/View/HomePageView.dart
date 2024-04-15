@@ -43,7 +43,7 @@ class _PaginaHomeState extends State<PaginaHome> {
         _darkMode); // Salva o estado do tema escuro nas preferências compartilhadas
   }
 
-  Future<void> _mudarIdioma([ValueKey<String?>? valueKey]) async {
+  Future<void> _mudarIdioma() async {
     setState(() {
       //
     });
@@ -76,7 +76,7 @@ class _PaginaHomeState extends State<PaginaHome> {
               DropdownButton<String>(
                 value: _idioma,
                 onChanged: (value) {
-                  _mudarIdioma(ValueKey(value));
+                  _mudarIdioma();
                 },
                 items: <DropdownMenuItem<String>>[
                   DropdownMenuItem(
