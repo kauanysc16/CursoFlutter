@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:sa2/model/ConfigModel.dart';
+
 
 class SettingsPage extends StatefulWidget {
+  const SettingsPage({Key? key}) : super(key: key);
+
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  double _fontSize = 16.0; // Tamanho de fonte padrão
-  String _selectedLanguage = 'Português'; // Idioma padrão
-  List<String> _languages = ['Português', 'Inglês', 'Espanhol']; // Lista de idiomas disponíveis
+  final SettingsModel _settings = SettingsModel();
 
   @override
   Widget build(BuildContext context) {
@@ -20,36 +22,41 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            // Configurações de Fonte
             Text(
               'Configurações de Fonte',
-              style: TextStyle(fontSize: _fontSize),
+              style: TextStyle(fontSize: _settings.fontSize),
             ),
             SizedBox(height: 20),
+            // Dropdown para selecionar o idioma
             DropdownButton<String>(
-              value: _selectedLanguage,
+              value: _settings.selectedLanguage,
               onChanged: (newValue) {
                 setState(() {
-                  _selectedLanguage = newValue!;
+                  _settings.selectedLanguage = newValue!;
                 });
               },
-              items: _languages.map((language) {
+              // Cria itens do dropdown com base na lista de idiomas disponíveis
+              items: SettingsModel.languages.map((language) {
                 return DropdownMenuItem<String>(
                   value: language,
                   child: Text(language),
                 );
               }).toList(),
             ),
+            // Slider para ajustar o tamanho da fonte
             Slider(
-              value: _fontSize,
+              value: _settings.fontSize,
               min: 10,
               max: 30,
               divisions: 4,
               onChanged: (newValue) {
                 setState(() {
-                  _fontSize = newValue;
+                  _settings.fontSize = newValue;
                 });
               },
-              label: _fontSize.toStringAsFixed(0),
+              // Exibe o valor do slider como um rótulo
+              label: _settings.fontSize.toStringAsFixed(0),
             ),
           ],
         ),
