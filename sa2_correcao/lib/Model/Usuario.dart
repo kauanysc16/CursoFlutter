@@ -4,11 +4,11 @@ class Usuario {
   String nome;
   String email;
   String senha;
-  //construtor
+  //Construtor
   Usuario({required this.nome, required this.email, required this.senha, required id});
 
-  Map<String, Object?> toMap() {
-    return {
+  Map<String, dynamic> toMap() {
+     return {
       'u_nome': nome,
       'email': email,
       'senha': senha,
@@ -20,8 +20,8 @@ class Usuario {
       id:map['id'],
       nome: map['u_nome'],
       email: map['email'],
-      senha: map['senha'], 
-
+      senha: map['senha'],
     );
   }
+
 }
