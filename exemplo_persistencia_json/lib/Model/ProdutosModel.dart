@@ -1,23 +1,26 @@
 class Produto {
+  //atributos
   final String nome;
-  final double preco;
+  final int preco;
   final String categoria;
-
-  Produto({required this.nome, required this.preco, required this.categoria});
-
-  Map<String, dynamic> toMap() {
+  //construtor
+  const Produto({
+    required this.nome,
+    required this.preco,
+    required this.categoria});
+  //métodos
+  Map<String,dynamic> toJson() {
     return {
       'nome': nome,
       'preco': preco,
-      'categoria': categoria,
+      'categoria': categoria
     };
   }
-
-  factory Produto.fromMap(Map<String, dynamic> map) {
+  factory Produto.fromJson(Map<String,dynamic> json){
     return Produto(
-      nome: map['nome'],
-      preco: map['preco'],
-      categoria: map['categoria'],
+      nome: json['nome'],
+      preco: json['preco'],
+      categoria: json['categoria']
     );
   }
 }
